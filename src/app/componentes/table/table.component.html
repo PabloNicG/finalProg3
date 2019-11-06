@@ -1,0 +1,87 @@
+<div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " href="#">Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Consultas</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Contacto</a>
+    </li>
+  </ul>
+</div>
+<br />
+
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+
+    <div>
+      <div>
+        <!--div del button Agregar-->
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Consultas.com</h1>
+            <p class="lead">
+              Aquí podrá realizar sus consultas y agregar registros a nuestra
+              base de datos.
+            </p>
+          </div>
+        </div>
+        
+        <br />
+        <br />
+
+        <button type="button" class="btn btn-primary btn-sm">Agregar</button>
+      </div>
+      <br />
+      <div class="col-8"></div>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Edad</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Calle</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let i of personas">
+            <!-- esto es un for each-->
+            <th scope="row">{{ i.id }}</th>
+
+            <td>{{ i.nombre }}</td>
+            <td>{{ i.apellido }}</td>
+            <td>{{ i.edad }}</td>
+            <td>{{ i.dni }}</td>
+            <td>{{ i.domicilio.calle }}</td>
+            <td>{{ i.domicilio.numero }}</td>
+
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="delete(i.id)"
+              >
+                Eliminar
+              </button>
+
+              <button type="button" class="btn btn-outline-warning btn-sm">
+                Editar
+              </button>
+              <!--<td>Eliminar Editar</td>-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div>
