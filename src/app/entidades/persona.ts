@@ -1,14 +1,11 @@
+import {Base} from './base';
+import {Domicilio}from'./domicilio';
 
-export class Persona {
+export class Persona extends Base{
 
-    id: number;
     nombre: string;
     apellido: string;
     edad: number;
     dni: number;
-    domicilio:{
-    numero:number;
-    calle: string;
-    
-}
+    domicilio: Domicilio;
 }
