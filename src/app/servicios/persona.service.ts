@@ -1,6 +1,8 @@
+import { Persona } from 'src/app/entidades/persona';
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { Persona } from '../entidades/persona';
+//import { Persona } from '../entidades/persona';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,6 +13,8 @@ import { Observable } from 'rxjs';
 export class PersonaService {
 
     miUrl: string = 'http://localhost:9001/api/v1/persona/';
+    //rutaActiva: any;
+   
 
     constructor(private http: HttpClient) { }
 
@@ -19,9 +23,9 @@ export class PersonaService {
         return this.http.get<Persona[]>(this.miUrl);
     }
 
-    getOne(id: number): Observable<Persona[]> {
+    getOne(id: number): Observable<Persona> {
 
-        return this.http.get<Persona[]>(this.miUrl + id);
+        return this.http.get<Persona>(this.miUrl + id);
 
     }
 
@@ -31,6 +35,7 @@ export class PersonaService {
     }
 
     post(persona: Persona): Observable<Persona> {
+        console.log("Servicio Post")
         return this.http.post<Persona>(this.miUrl, persona);
 
     }
