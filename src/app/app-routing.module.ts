@@ -8,8 +8,8 @@ import { from } from 'rxjs';
 const routes: Routes = [
 //no se utilizaran 
 
- // {path: '', component: TableComponent},
- // {path: 'persona/:id', component: ModalComponent},
+ //{path: '', component: TableComponent}
+ //{path: 'persona/:id', component: TableComponent},
  // {path: '**', pathMatch: 'full', redirectTo: ModalComponent}
 ];
 

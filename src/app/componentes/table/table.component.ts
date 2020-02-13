@@ -43,11 +43,12 @@ export class TableComponent implements OnInit {
     }
 
     validatorForm(){
-        this.formReact = this.formBuilder.group({nombre: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        this.formReact = this.formBuilder.group({nombre: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.pattern('^[a-zA-Z]+$')])],
         /*Para validar el nombre se necesita el formuReact(FormGroup) que depende del builder, dentro de este se arma el group o grupo de controles de estado
-          para nombre voy a necesitar si o si que sea ingresado el campo y como minimo 4 letras de nombre*/
-        apellido: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-        //Para apellido exijo lo mismo que para nombre
+          para nombre voy a necesitar si o si que sea ingresado el campo y como minimo 4 letras de nombre - Ademas de validar que solo se ingresen letras, 
+          esta capacidad nos la entrega el pattern que más adelante se usará con numeros*/
+        apellido: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.pattern('^[a-zA-Z]+$')])],
+        //Para apellido exijo lo mismo que para nombre, tambien se utiliza el pattern para letras
         dni: ['', Validators.compose([Validators.required, Validators.maxLength(8) ,Validators.minLength(8), Validators.pattern('^[0-9]+$')])]
         //Para el dni requiero un maximo de 8 digitos y un minimo de la misma cantidad (dni Argentina) y con el pattern (control de marcado)
     });

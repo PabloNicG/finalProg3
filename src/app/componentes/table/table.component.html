@@ -33,37 +33,36 @@
         <br />
         <br />
 
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalComponent"(click)="agregar(0)">
+        <button type="button" class="btn btn-primary btn-sm" (click)="agregarPers(0)">
           Agregar
         </button>
       </div>
       <br />
       <div class="col-8"></div>
-      <table class="table">
-        <thead class="thead-dark">
+      <table class="table table-striped">
+        
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">DNI</th>
           </tr>
-        </thead>
+        
 
         <tbody>
-          <tr *ngFor="let i of personas">
+          <tr *ngFor="let persona of personas">
             <!-- esto es un for each-->
-            <th scope="row">{{ i.id }}</th>
+            <th scope="row">{{ persona.id}}</th>
+            <td>{{ persona.nombre}}</td>
+            <td>{{ persona.apellido}}</td>
+            <td>{{ persona.dni}}</td>
 
-            <td>{{ i.nombre }}</td>
-            <td>{{ i.apellido }}</td>
-            <td>{{ i.dni }}</td>
-
-            <td>
-              <button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i.id)">
+            
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deletePers(persona.id)">
                 Eliminar
               </button>
 
-              <button type="button" class="btn btn-outline-warning btn-sm" (click)="update(i.id)">
+              <button type="button" class="btn btn-outline-warning btn-sm" (click)="creationFormUpdate(persona.id)">
                 Editar
               </button>
               <!--<td>Eliminar Editar</td>-->
@@ -78,6 +77,88 @@
 </div>
 
 
+<!-- HTML - FORMGROUP -->
+
+
+<div class = "mx-auto" style="width: 680px;">
+<form [formGroup]="formReact">
+  <div class="form-group">
+
+    <!-- NOMBRE -->
+    <label>Nombre</label>
+    <input  class="form-control" type="text" formControlName ="nombre" placeholder="Ingresar nombre">
+
+    <!-- Acá se pondran en practica las validaciones hechas en el table -->
+    <div *ngIf="formReact.controls['nombre'].invalid && formReact.control['nombre'].dirty"> 
+
+      <div *ngIf="formReact.controls['nombre'].errors.required" class = "alert alert-danger"role="Alert">Inserte el nombre</div>
+      <!-- Valida que se ingrese el nombre -->
+    </div>
+
+    <div *ngIf="formReact.controls['nombre'].errors.required.minlength" class = "alert alert-danger"role="Alert">El nombre debe contener al menos 4 letras</div>
+    <!-- Valida que se ingrese un nombre con un minimo de 4 letras -->
+
+    <div *ngIf="formReact.controls['nombre'].errors.required.pattern" class = "alert alert-danger"role="Alert">Solo se admiten letras</div>
+    <!-- Valida que se ingrese el nombre y solo sea letras -->
+    <!-- Este bloque de codigo se reutilizará para apellido y dni -->   
+  </div>
+
+
+
+  <!-- APELLIDO -->
+  <div class="form-group">
+    <label>Apellido</label>
+    <input  class="form-control" type="text" formControlName ="apellido" placeholder="Ingresar apellido">
+
+    <!-- Acá se pondran en practica las validaciones hechas en el table -->
+    <div *ngIf="formReact.controls['apellido'].invalid && formReact.control['apellido'].dirty"> 
+
+      <div *ngIf="formReact.controls['apellido'].errors.required" class = "alert alert-danger" role="Alert">Inserte el apellido</div>
+      <!-- Valida que se ingrese el apellido -->
+    </div>
+
+    <div *ngIf="formReact.controls['apellido'].errors.required.minlength" class="alert alert-danger"role="Alert">El apellido debe contener al menos 4 letras</div>
+    <!-- Valida que se ingrese un apellido con un minimo de 4 letras -->
+
+    <div *ngIf="formReact.controls['apellido'].errors.required.pattern" class = "alert alert-danger"role="Alert">Solo se admiten letras</div>
+    <!-- Valida que se ingrese el apellido y solo sea letras -->
+    <!-- Este bloque de codigo se reutilizará para dni -->
+  </div>
+
+
+
+    <!-- DNI -->
+    <div class="form-group">
+      <label>DNI</label>
+      <input  formControlName ="dni"  type="text" class="form-control"  placeholder="Ingresar dni">
+  
+      <!-- Acá se pondran en practica las validaciones hechas en el table -->
+      <div *ngIf="formReact.controls['dni'].invalid && formReact.control['dni'].dirty"> 
+  
+        <div *ngIf="formReact.controls['dni'].errors.required" class = "alert alert-danger"role="Alert">Inserte el dni</div>
+        <!-- Valida que se ingrese el dni -->
+      </div>
+  
+      <div *ngIf="formReact.controls['dni'].errors.required.minlength" class = "alert alert-danger"role="Alert">El apellido debe contener 8 numeros</div>
+      <!-- Valida que se ingrese un dni con un minimo y un maximo de 8 letras -->
+  
+      <div *ngIf="formReact.controls['dni'].errors.required.pattern" class = "alert alert-danger"role="Alert">Solo se admiten numeros</div>
+      <!-- Valida que se ingrese el dni y solo sea numeros -->
+    </div>
+  
+    <!-- BOTONES -->
+      <button *ngIf="!update" [disabled]="formReact.invalid" class="btn btn-outline-secondary btn-block" (click)="agregarPers()">Insertar</button>
+      <!-- Si no se va a editar se utiliza el agregar. 
+      El boton es desabilitado si no se cumple alguna de las condiciones que se piden anteriormente, 
+      si se cumplen se puede insertar y el evento click llama a agregar -->
+      
+      <button *ngIf="update" [disabled]="formReact.invalid" class="btn btn-outline-success btn-block" (click)="updatePers()">Editar</button>
+      <!-- Si se va a editar un registro (metodo update) tambien verifica que esten dadas las condiciones 
+        para poder actuar, si esta todo bien se dispara el evento click de updatePers -->
+  </form>
+</div>
+
+<!-- MODAL DE PRUEBA -->
 <!-- <div class="modal fade" id="modalComponent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
