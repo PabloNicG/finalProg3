@@ -1,5 +1,5 @@
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from './componentes/modal/modal.component';
+//import { ModalComponent } from './componentes/modal/modal.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -8,7 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './componentes/table/table.component';
-import { ElementoComponent } from './componentes/elementos/elemento.component';
+//import { ElementoComponent } from './componentes/elementos/elemento.component';
 import { FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { PersonaService } from './servicios/persona.service';
@@ -18,8 +18,8 @@ import { PersonaService } from './servicios/persona.service';
   declarations: [
     AppComponent,
     TableComponent,
-    ElementoComponent,
-    ModalComponent
+    //ElementoComponent,
+    //ModalComponent
   ],
   imports: [
     BrowserModule,

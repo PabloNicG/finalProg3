@@ -1,4 +1,14 @@
-# PerDoAbm
+# Descripcion: 
+
+Este trabajo ha sido realizado sobre la base de un proyecto anterior, se rescato parte del codigo y se mejoro para poder realizar un  formulario reactivo, como no es necesario usar todas las secciones del codigo se han comentado he inutilizado algunas partes del como:
+
+[component/modal.]
+[component/elementos.]
+
+Este proyecto pertenece al examen final de Programacion 3 UTN-FRM.
+
+
+## PerDoAbm
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
 

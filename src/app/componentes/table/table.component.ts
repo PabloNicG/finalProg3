@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
     styleUrls: ["./table.component.css"]
 })
 export class TableComponent implements OnInit {
+    
     personas: Persona[] = [];
     id: number;
     update: false;
@@ -35,7 +36,7 @@ export class TableComponent implements OnInit {
 
     creationFormUpdate(persona: Persona){
 
-        this.update = true;
+        this.update = false;
         this.formReact.setValue({nombre: persona.nombre, apellido: persona.apellido, dni: persona.dni});//datos que necesito para el form a editar
         this.id = persona.id; //llamo al id de persona
 
@@ -80,12 +81,25 @@ export class TableComponent implements OnInit {
         //this.router.navigate();
         //this.router.navigate(['persona/'+ id]);
 
-        
+        this.service.post(this.formReact.value).subscribe((data)=>{
+            this.persona = data;
+            this.personas.push(this.persona);
+            this.getAll();
+            this.formReact.reset(); //una vez agregada la persona se resetea el formulario
+        })
     };
 
     updatePers(id:number){
 
-        this.router.navigate(['persona/'+id]);
+       // this.router.navigate(['persona/'+id]);
+
+       this.service.put(this.id, this.formReact.value).subscribe((data)=>{ //Misma forma que la anterior solo que utiliza el id y put para poder editar
+        this.persona = data;
+        this.personas.push(this.persona);
+        this.getAll();
+        this.formReact.reset(); //cuando se actualiza la persona se resetea el formulario como si se agregara 
+    })
+
     };
 
 }
