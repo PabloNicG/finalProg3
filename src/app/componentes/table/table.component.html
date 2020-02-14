@@ -12,14 +12,14 @@
   </ul>
 </div>
 <br />
-
+<!-- navbar para de enbellecimiento -->
 <div class="container">
   <div class="row">
     <div class="col"></div>
 
     <div>
       <div>
-        <!--div del button Agregar-->
+        <!--Jumbotron de enbellecimiento-->
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
             <h1 class="display-4">Consultas.com</h1>
@@ -30,25 +30,20 @@
           </div>
         </div>
 
-        <br />
-        <br />
-
-        <button type="button" class="btn btn-primary btn-sm" (click)="agregarPers(0)">
-          Agregar
-        </button>
+     
       </div>
       <br />
       <div class="col-8"></div>
       <table class="table table-striped">
-        
+        <thead class="thead">
           <tr>
-            <th scope="col">Id</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">DNI</th>
           </tr>
-        
-
+        </thead>
+        <!-- Cuerpo de la tabla y su customizacion -->
         <tbody>
           <tr *ngFor="let persona of personas">
             <!-- esto es un for each-->
@@ -57,48 +52,54 @@
             <td>{{ persona.apellido}}</td>
             <td>{{ persona.dni}}</td>
 
-            
-              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deletePers(persona.id)">
-                Eliminar
+            <td>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deletePers(persona.id)">Eliminar</button>
+              <!-- Como se realizo en una primera instancia en este codigo se elimina por id -->
+              <button type="button" class="btn btn-outline-warning btn-sm" (click)="creationFormUpdate(persona)">
+                Seleccionar para editar
               </button>
-
-              <button type="button" class="btn btn-outline-warning btn-sm" (click)="creationFormUpdate(persona.id)">
-                Editar
-              </button>
-              <!--<td>Eliminar Editar</td>-->
+              <!-- Para esta accion es necesario cargar el formulario de la tabla que se desea editar
+                   una vez cargado en el formulario reactivo se guarda y modifica el registro con el updatePers-->
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
     <div class="col"></div>
   </div>
 </div>
 
 
-<!-- HTML - FORMGROUP -->
 
+<!-- HTML - FORMGROUP -->
 
 <div class = "mx-auto" style="width: 680px;">
 <form [formGroup]="formReact">
   <div class="form-group">
+    <br/>
+    <hr/>
+    <br/>
 
-    <!-- NOMBRE -->
-    <label>Nombre</label>
-    <input  class="form-control" type="text" formControlName ="nombre" placeholder="Ingresar nombre">
+    <!-- Pequeño navbar para diferenciar la tabla del documento  -->
+    <nav class="navbar navbar-light bg-light font-weight-bold rounded ">
+      <a class="navbar-brand" href="#">Ingreso de datos</a>
+    </nav>
+    <br/>
+    <hr/>
+    <br/>
+
+  <!-- NOMBRE -->
+    <label >Nombre</label>
+    <input  formControlName ="nombre" type="text" class="form-control" placeholder="Ingresar nombre">
 
     <!-- Acá se pondran en practica las validaciones hechas en el table -->
-    <div *ngIf="formReact.controls['nombre'].invalid && formReact.control['nombre'].dirty"> 
+    <div *ngIf="formReact.controls['nombre'].invalid && formReact.controls['nombre'].dirty"> 
 
-      <div *ngIf="formReact.controls['nombre'].errors.required" class = "alert alert-danger"role="Alert">Inserte el nombre</div>
+      <div *ngIf="formReact.controls['nombre'].errors.required" class = "alert alert-danger"role="alert">Inserte el nombre</div>
       <!-- Valida que se ingrese el nombre -->
     </div>
 
-    <div *ngIf="formReact.controls['nombre'].errors.required.minlength" class = "alert alert-danger"role="Alert">El nombre debe contener al menos 4 letras</div>
-    <!-- Valida que se ingrese un nombre con un minimo de 4 letras -->
-
-    <div *ngIf="formReact.controls['nombre'].errors.required.pattern" class = "alert alert-danger"role="Alert">Solo se admiten letras</div>
+    <div *ngIf="formReact.controls['nombre'].errors.pattern" class = "alert alert-danger"role="alert">Solo se admiten letras</div>
     <!-- Valida que se ingrese el nombre y solo sea letras -->
     <!-- Este bloque de codigo se reutilizará para apellido y dni -->   
   </div>
@@ -111,16 +112,13 @@
     <input  class="form-control" type="text" formControlName ="apellido" placeholder="Ingresar apellido">
 
     <!-- Acá se pondran en practica las validaciones hechas en el table -->
-    <div *ngIf="formReact.controls['apellido'].invalid && formReact.control['apellido'].dirty"> 
+    <div *ngIf="formReact.controls['apellido'].invalid && formReact.controls['apellido'].dirty"> 
 
-      <div *ngIf="formReact.controls['apellido'].errors.required" class = "alert alert-danger" role="Alert">Inserte el apellido</div>
+    <div *ngIf="formReact.controls['apellido'].errors.required" class = "alert alert-danger" role="alert">Inserte el apellido</div>
       <!-- Valida que se ingrese el apellido -->
     </div>
 
-    <div *ngIf="formReact.controls['apellido'].errors.required.minlength" class="alert alert-danger"role="Alert">El apellido debe contener al menos 4 letras</div>
-    <!-- Valida que se ingrese un apellido con un minimo de 4 letras -->
-
-    <div *ngIf="formReact.controls['apellido'].errors.required.pattern" class = "alert alert-danger"role="Alert">Solo se admiten letras</div>
+    <div *ngIf="formReact.controls['apellido'].errors.pattern" class = "alert alert-danger"role="alert">Solo se admiten letras</div>
     <!-- Valida que se ingrese el apellido y solo sea letras -->
     <!-- Este bloque de codigo se reutilizará para dni -->
   </div>
@@ -133,39 +131,53 @@
       <input  formControlName ="dni"  type="text" class="form-control"  placeholder="Ingresar dni">
   
       <!-- Acá se pondran en practica las validaciones hechas en el table -->
-      <div *ngIf="formReact.controls['dni'].invalid && formReact.control['dni'].dirty"> 
+      <div *ngIf="formReact.controls['dni'].invalid && formReact.controls['dni'].dirty"> 
   
-        <div *ngIf="formReact.controls['dni'].errors.required" class = "alert alert-danger"role="Alert">Inserte el dni</div>
+      <div *ngIf="formReact.controls['dni'].errors.required" class = "alert alert-danger"role="alert">Inserte el dni</div>
         <!-- Valida que se ingrese el dni -->
       </div>
   
-      <div *ngIf="formReact.controls['dni'].errors.required.minlength" class = "alert alert-danger"role="Alert">El apellido debe contener 8 numeros</div>
+      <div *ngIf="formReact.controls['dni'].errors.minlength" class = "alert alert-danger"role="alert">El apellido debe contener 8 numeros</div> 
       <!-- Valida que se ingrese un dni con un minimo y un maximo de 8 letras -->
   
-      <div *ngIf="formReact.controls['dni'].errors.required.pattern" class = "alert alert-danger"role="Alert">Solo se admiten numeros</div>
+      <div *ngIf="formReact.controls['dni'].errors.pattern" class = "alert alert-danger"role="alert">Solo se admiten numeros</div>
       <!-- Valida que se ingrese el dni y solo sea numeros -->
     </div>
-  
+    
+   
+
     <!-- BOTONES -->
-      <button *ngIf="!update" [disabled]="formReact.invalid" class="btn btn-outline-secondary btn-block" (click)="agregarPers()">Insertar</button>
+      <!-- <button *ngIf="!updatePers" [disabled]="formReact.invalid" type="button" class="btn btn-primary btn-sm" (click)="agregarPers()">Insertar</button> -->
+    
+     <!-- <button type="button" [disabled]="formReact.invalid" class="btn btn-primary btn-sm" (click)="agregarPers()">Agregar</button>   -->
+
+     <button *ngIf="updatePers" [disabled]="formulario.invalid" class="btn btn-success btn-block"
+               (click)="agregarPers()"> Agregar </button>
+
+              <button *ngIf="updatePers" [disabled]="formulario.invalid" class="btn btn-primary btn-block"
+               (click)="updatePers()"> Guardar </button> 
+               <!-- Este gurdar sería el editar, se guarda lo editado -->
+    <br/>
+    <hr/>
+    <br/>
       <!-- Si no se va a editar se utiliza el agregar. 
       El boton es desabilitado si no se cumple alguna de las condiciones que se piden anteriormente, 
       si se cumplen se puede insertar y el evento click llama a agregar -->
-      
-      <button *ngIf="update" [disabled]="formReact.invalid" class="btn btn-outline-success btn-block" (click)="updatePers()">Editar</button>
+  
       <!-- Si se va a editar un registro (metodo update) tambien verifica que esten dadas las condiciones 
         para poder actuar, si esta todo bien se dispara el evento click de updatePers -->
   </form>
 </div>
 
-<!-- MODAL DE PRUEBA -->
+
+
+
+<!-- MODAL DE PRUEBA NO SE UTILIZARÁ-->
 <!-- <div class="modal fade" id="modalComponent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-       
 
-          
           <h5 class="modal-title" id="exampleModalLongTitle">{{!this.service.selectedPro.id ? 'Modal title': 'Update'}}</h5>
         
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
