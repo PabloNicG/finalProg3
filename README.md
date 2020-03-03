@@ -1,5 +1,7 @@
 #Aprendiendo a trabajar con Fork
 
+##Recursos de git
+
 ## Descripcion: 
 
 Este trabajo ha sido realizado sobre la base de un proyecto anterior, se rescato parte del codigo y se mejoro para poder realizar un  formulario reactivo, como no es necesario usar todas las secciones del codigo se han comentado he inutilizado algunas partes del como `component/modal.`, `component/elementos.` entre otros. El codigo base es en el que se ha practicado en las clases, es una base excelente para poder hacer pruebas y aprender nuevos metodos.
